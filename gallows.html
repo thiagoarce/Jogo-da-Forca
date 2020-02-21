@@ -27,5 +27,13 @@
     </div>
 
     <script src="js/jquery.min.js"></script>
+    <script src="js/sprite.js"></script>
+    <script>
+        let sprite = createSprite('.sprite');
+
+        setInterval(function(){
+            sprite.nextframe();
+        }, 500);
+    </script>
 </body>
 </html>
