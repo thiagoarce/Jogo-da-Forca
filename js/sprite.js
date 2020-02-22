@@ -1,29 +1,26 @@
+function createSprite(seletor) {
 
-function createSprite(classe){
-    
-        let sprite = new Sprite(classe)
-        console.log(sprite)
-
-        return sprite  
+    return new Sprite(seletor)
 }
 
 class Sprite {
-    
-    constructor(classe){
-        this.sprite = $(classe)
-        this.frame = 0
-    }
-    
-    nextframe() {
 
-        this.sprite[0].classList.remove('frame' + this.frame)
-        console.log('ok')
-        this.frame++
-        if(this.frame == 10){
-                this.frame = 0
-        }else{
-            this.sprite[0].classList.add('frame' + this.frame)
-        }
-        
+    constructor(seletor) {
+        this._sprite = $(seletor)
+        this._current = 0
+        this._last = 9
     }
+
+    nextframe() {
+        if (this._hasnext()) this._setframe(`frame${this._current}`,`frame${++this._current}`)
+    };
+
+    _hasnext() {
+        return this._current + 1 <= this._last
+    };
+
+    _setframe(from, to) {
+        this._sprite[0].classList.remove(from)
+        this._sprite[0].classList.add(to)
+    };
 }
