@@ -1,26 +1,35 @@
 function createSprite(seletor) {
 
-    return new Sprite(seletor)
+    return new Sprite(seletor);
 }
 
 class Sprite {
 
     constructor(seletor) {
-        this._sprite = $(seletor)
-        this._current = 0
-        this._last = 9
+        this._sprite = document.querySelector(seletor);
+        this._current = 1;
+        this._last = 9;
     }
 
-    nextframe() {
-        if (this._hasnext()) this._setframe(`frame${this._current}`,`frame${++this._current}`)
+    nextFrame() {
+        if (this._hasnext()) this._setframe(`frame${this._current}`,`frame${++this._current}`);
     };
 
     _hasnext() {
-        return this._current + 1 <= this._last
+        return this._current + 1 <= this._last;
     };
 
     _setframe(from, to) {
-        this._sprite[0].classList.remove(from)
-        this._sprite[0].classList.add(to)
+        this._sprite.classList.remove(from);
+        this._sprite.classList.add(to);
     };
+
+    reset(){
+        this._setframe(`frame${this._current}`, `frame0`);
+        this._current = 1;
+    }
+
+    isFinished(){
+        return !this._hasnext();
+    }
 }
