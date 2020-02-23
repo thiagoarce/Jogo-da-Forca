@@ -1,15 +1,18 @@
-var criaJogo = function () {
+var criaJogo = function (sprite) {
 
-    return new Jogo();
+    return new Jogo(sprite);
 };
 
 class Jogo {
 
-    constructor() {
+    constructor(sprite) {
+        this._sprite = sprite;
         this._etapa = 1;
-        this._palavraSecreta = ""
+        this._chutes = []
+        this._palavraSecreta = "";
         this._lacunas = [];
     }
+
 
     // recebe a palavra secreta e deve atribuí-la à variável `palavraSecreta`. Vai para a próxima etapa
     setPalavraSecreta(palavra) {
@@ -19,7 +22,7 @@ class Jogo {
         this._proximaEtapa(2);
     };
 
-    _proximaEtapa(etapa){
+    _proximaEtapa(etapa) {
         this._etapa = etapa
     }
 
@@ -36,5 +39,32 @@ class Jogo {
     // retorna a etapa atual do jogo
     getEtapa() {
         return this._etapa;
+    };
+
+    processaChute(chute) {
+
+        if (this._chutes.indexOf(chute) == -1) { //verifica se o chute já foi dado
+            
+            if (this._palavraSecreta.match(chute)) {
+
+                this._insereNaLacuna(chute) //acertou insere o chute na Lacuna
+                this._guardaChutes(chute)   //guarda o chute no array de chutes já dados
+
+            } else {
+
+                this._sprite.nextFrame() //errou coloca o próximo frame
+                this._guardaChutes(chute) //guarda o chute no array de chutes já dados
+            }
+        }
+    }
+
+    _guardaChutes(chute) {
+        this._chutes.push(chute)
+    }
+
+    _insereNaLacuna(chute) {
+        for (let i = 0; i < this._palavraSecreta.length; i++) {
+            if (this._palavraSecreta[i] == chute) this._lacunas[i] = chute
+        }
     }
 }
