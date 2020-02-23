@@ -25,9 +25,7 @@ class Jogo {
 
     _geraLacunas(tamanho) {
         this._lacunas = [];
-        for (let i = 0; i < tamanho; i++) {
-            this._lacunas.push('');
-        }
+        this._lacunas = Array(tamanho).fill('');
     };
 
     // retorna as lacunas do jogo. Importante para quem for exibí-las.
