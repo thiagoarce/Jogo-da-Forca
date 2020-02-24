@@ -1,6 +1,7 @@
-var criaJogo = function (sprite) {
-
+function criaJogo(sprite) {
+    
     return new Jogo(sprite);
+    
 };
 
 class Jogo {

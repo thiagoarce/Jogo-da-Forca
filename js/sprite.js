@@ -1,5 +1,5 @@
 function createSprite(seletor) {
-
+    
     return new Sprite(seletor);
 }
 

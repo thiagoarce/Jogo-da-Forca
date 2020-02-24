@@ -28,5 +28,14 @@
 
     <script src="js/sprite.js"></script>
     <script src="js/jogo.js"></script>
+    <script src="js/controller.js"></script>
+    <script>
+    var controller = criaController(
+        criaJogo(
+            createSprite('.sprite')
+        )
+    )
+    controller.inicia();
+</script>
 </body>
 </html>
