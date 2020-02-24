@@ -16,7 +16,10 @@ class Controller {
         let ulLacunas = this._lacunas;
         ulLacunas.innerHTML = ""
         this._jogo.getLacunas().forEach((letra) => {
-            ulLacunas.appendChild(document.createElement('li')).classList.add('lacuna');
+            let li = document.createElement('li');
+            li.textContent = letra
+            li.classList.add('lacuna');
+            ulLacunas.appendChild(li)
         });
         
     };
@@ -37,6 +40,36 @@ class Controller {
         
     };
 
+    leChute(){
+        let jogo = this._jogo;
+        let Controller = this;
+        jogo.processaChute(this._entrada.value.trim().toLowerCase()[0])
+        this._entrada.value = ""
+        this.exibeLacunas();
+
+       setTimeout(function(){
+           if(jogo.ganhouOuPerdeu()){
+               
+               if(jogo.ganhou()){
+                   alert("Você ganhou!")
+               }
+       
+               if(jogo.perdeu()){
+                   alert("Você perdeu!")
+               }
+               Controller.reiniciaJogo();
+           }
+           
+       }, 200) 
+    }
+
+    reiniciaJogo(){
+        
+        this._lacunas.innerHTML = ""
+        this.mudaPlaceHolder('Palavra Secreta');
+        this._jogo.reinicia()
+    }
+
     // faz a associação do evento keypress para capturar a entrada do usuário toda vez que ele teclar ENTER
     inicia() {
 
@@ -45,10 +78,10 @@ class Controller {
             if (event.which == 13) {
                 switch (Controller._jogo.getEtapa()) {
                     case 1:
-                        Controller.guardaPalavraSecreta()
+                        Controller.guardaPalavraSecreta();
                         break;
                     case 2:
-                        alert('etapa 2 - falta implementar');
+                        Controller.leChute();
                         break;
                 }
             }
