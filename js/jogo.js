@@ -17,7 +17,7 @@ class Jogo {
 
     // recebe a palavra secreta e deve atribuí-la à variável `palavraSecreta`. Vai para a próxima etapa
     setPalavraSecreta(palavra) {
-
+        if(!palavra.trim()) throw Error('Palavra inválida');
         this._palavraSecreta = palavra.toLowerCase();
         this._geraLacunas(this._palavraSecreta.length);
         this._proximaEtapa(2);
@@ -43,6 +43,7 @@ class Jogo {
     };
 
     processaChute(chute) {
+        if(!chute) throw Error('Chute inválido');
         chute = chute.toLowerCase();
         if (this._chutes.indexOf(chute) == -1) { //verifica se o chute já foi dado
             

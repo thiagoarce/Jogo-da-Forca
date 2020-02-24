@@ -8,10 +8,10 @@ class Controller {
         this._jogo = jogo;
         this._entrada = document.querySelector('#entrada');
         this._lacunas = document.querySelector('.lacunas');
-        
+
     }
 
-     // consulta jogo.getLacunas() e exibe para o usuário cada lacuna 
+    // consulta jogo.getLacunas() e exibe para o usuário cada lacuna 
     exibeLacunas() {
         let ulLacunas = this._lacunas;
         ulLacunas.innerHTML = ""
@@ -21,7 +21,7 @@ class Controller {
             li.classList.add('lacuna');
             ulLacunas.appendChild(li)
         });
-        
+
     };
 
     // muda o texto do placeHolder do campo de entrada 
@@ -30,41 +30,48 @@ class Controller {
         this._entrada.placeholder = texto;
     };
 
-     // passa para jogo.setPalavraSecreta() o valor digitado pelo jogador e chama o a função `exibeLacunas()` e `mudaPlaceHolder()` definidas no controller. 
+    // passa para jogo.setPalavraSecreta() o valor digitado pelo jogador e chama o a função `exibeLacunas()` e `mudaPlaceHolder()` definidas no controller. 
     guardaPalavraSecreta() {
-        
-        this._jogo.setPalavraSecreta(this._entrada.value.trim().toLowerCase())
-        this.exibeLacunas();
-        this.mudaPlaceHolder('chute');
-        this._entrada.value = ""
-        
+
+        try {
+            this._jogo.setPalavraSecreta(this._entrada.value.trim().toLowerCase())
+            this.exibeLacunas();
+            this.mudaPlaceHolder('chute');
+            this._entrada.value = ""
+        } catch (err) {
+            alert(err.message);
+        }
     };
 
-    leChute(){
-        let jogo = this._jogo;
-        let Controller = this;
-        jogo.processaChute(this._entrada.value.trim().toLowerCase()[0])
-        this._entrada.value = ""
-        this.exibeLacunas();
+    leChute() {
+        try {
+            let jogo = this._jogo;
+            let Controller = this;
+            jogo.processaChute(this._entrada.value.trim().toLowerCase()[0])
+            this._entrada.value = ""
+            this.exibeLacunas();
 
-       setTimeout(function(){
-           if(jogo.ganhouOuPerdeu()){
-               
-               if(jogo.ganhou()){
-                   alert("Você ganhou!")
-               }
-       
-               if(jogo.perdeu()){
-                   alert("Você perdeu!")
-               }
-               Controller.reiniciaJogo();
-           }
-           
-       }, 200) 
+            setTimeout(function () {
+                if (jogo.ganhouOuPerdeu()) {
+
+                    if (jogo.ganhou()) {
+                        alert("Você ganhou!")
+                    }
+
+                    if (jogo.perdeu()) {
+                        alert("Você perdeu!")
+                    }
+                    Controller.reiniciaJogo();
+                }
+
+            }, 200)
+        } catch (err) {
+            alert(err.message);
+        }
     }
 
-    reiniciaJogo(){
-        
+    reiniciaJogo() {
+
         this._lacunas.innerHTML = ""
         this.mudaPlaceHolder('Palavra Secreta');
         this._jogo.reinicia()
