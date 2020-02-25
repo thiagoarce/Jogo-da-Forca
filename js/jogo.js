@@ -57,7 +57,9 @@ class Jogo {
                 this._sprite.nextFrame(); //errou coloca o próximo frame
                 this._guardaChutes(chute); //guarda o chute no array de chutes já dados
             };
-        };
+        } else {
+            throw Error('Chute já dado');
+        }
     };
 
     _guardaChutes(chute) {

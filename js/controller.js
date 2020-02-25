@@ -8,7 +8,7 @@ class Controller {
         this._jogo = jogo;
         this._entrada = document.querySelector('#entrada');
         this._lacunas = document.querySelector('.lacunas');
-
+        this._gerador = document.querySelector('#gerador');
     }
 
     // consulta jogo.getLacunas() e exibe para o usuário cada lacuna 
@@ -74,13 +74,21 @@ class Controller {
 
         this._lacunas.innerHTML = ""
         this.mudaPlaceHolder('Palavra Secreta');
-        this._jogo.reinicia()
+        this._jogo.reinicia();
+        this._gerador.classList.remove("invisivel");
     }
 
     // faz a associação do evento keypress para capturar a entrada do usuário toda vez que ele teclar ENTER
     inicia() {
 
         let Controller = this;
+        this._gerador.addEventListener("click", function(){
+                let palavra = palavras[Math.floor((Math.random() * 500) + 1)];
+                Controller._entrada.value = palavra;
+                Controller.guardaPalavraSecreta();
+                this.classList.add("invisivel");
+        })
+
         this._entrada.addEventListener('keypress', function (event) {
             if (event.which == 13) {
                 switch (Controller._jogo.getEtapa()) {

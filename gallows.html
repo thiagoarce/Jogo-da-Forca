@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/sprite.css">
     <link rel="stylesheet" href="css/lacuna.css">
+    <link rel="stylesheet" href="css/invisivel.css">
     <title>Jogo da Forca</title>
 </head>
 <body>
@@ -23,12 +24,14 @@
         <input id="entrada" 
             class="entrada"
             placeholder="Palavra secreta" autofocus>
+        <button id="gerador">Gerar palavra</button>
         </div>
     </div>
 
     <script src="js/sprite.js"></script>
     <script src="js/jogo.js"></script>
     <script src="js/controller.js"></script>
+    <script src="js/palavras.js"></script>
     <script>
     var controller = criaController(
         criaJogo(
@@ -36,6 +39,7 @@
         )
     )
     controller.inicia();
+
 </script>
 </body>
 </html>
