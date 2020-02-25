@@ -7,6 +7,7 @@ class Controller {
     constructor(jogo) {
         this._jogo = jogo;
         this._entrada = document.querySelector('#entrada');
+        this._chutes = document.querySelector('.chutes');
         this._lacunas = document.querySelector('.lacunas');
         this._gerador = document.querySelector('#gerador');
     }
@@ -23,6 +24,17 @@ class Controller {
         });
 
     };
+
+    exibeChutes(){
+        let ulChutes = this._chutes;
+        ulChutes.innerHTML = ""
+        this._jogo.getChutes().forEach((letra) => {
+            let li = document.createElement('li');
+            li.textContent = letra
+            li.classList.add('chute');
+            ulChutes.appendChild(li)
+        });
+    }
 
     // muda o texto do placeHolder do campo de entrada 
     mudaPlaceHolder(texto) {
@@ -50,6 +62,7 @@ class Controller {
             jogo.processaChute(this._entrada.value.trim().toLowerCase()[0])
             this._entrada.value = ""
             this.exibeLacunas();
+            this.exibeChutes();
 
             setTimeout(function () {
                 if (jogo.ganhouOuPerdeu()) {
@@ -73,6 +86,7 @@ class Controller {
     reiniciaJogo() {
 
         this._lacunas.innerHTML = ""
+        this._chutes.innerHTML = ""
         this.mudaPlaceHolder('Palavra Secreta');
         this._jogo.reinicia();
         this._gerador.classList.remove("invisivel");

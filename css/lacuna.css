@@ -5,3 +5,14 @@
     padding: 2%;
     margin: 1%;
 }
+
+.chute {
+    display: inline-block;
+    font-size: 1.5em;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+}
+
+.chutes{
+    margin-bottom: 0;
+}

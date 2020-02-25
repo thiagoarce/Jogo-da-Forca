@@ -36,6 +36,10 @@ class Jogo {
     getLacunas() {
         return this._lacunas;
     };
+    
+    getChutes(){
+        return this._chutes;
+    }
 
     // retorna a etapa atual do jogo
     getEtapa() {
